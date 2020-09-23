@@ -14,11 +14,15 @@ module.exports = class User {
         return this.friends
     }
 
-    addTrip(destination) {
-        this.trips.push(destination)
+    addTrip(trip) {
+        this.trips.push(trip)
     }
 
     getTrips() {
         return this.trips
+    }
+
+    checkFriend(user) {
+        return this.friends.includes(user);
     }
 }

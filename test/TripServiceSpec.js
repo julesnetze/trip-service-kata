@@ -6,10 +6,13 @@ var sinon = require('sinon');
 let assert = require('assert');
 let TripService = require('../src/TripService');
 let User = require('../src/User');
+let UserBuilder = require('./UserBuilder');
 
 describe('TripService', () => {
 
     var LoggedInUser = new User()
+    let anotherUser = new User();
+    
     class TestTripService extends TripService {
         getLoggedUser() {
             return LoggedInUser;
@@ -27,34 +30,21 @@ describe('TripService', () => {
                 return LoggedInUser;
             }
         }
-
         let testTripService = new TestTripService()
-        let friend = new User()
+        let friend = UserBuilder.aUser()
         expect(function() {
             testTripService.getTripsByUser(friend)
         }).to.throw(Error)
      });
 
      it('should return an array of 0 trips when users are not friends', () => {
-
-        let friend = new User()
-        let aFriend = new User()
-        friend.addFriend(aFriend)
-        friend.addTrip("Brasil")
+        let friend = UserBuilder.aUser().friendsWith(anotherUser).withTrips("Brasil").build()
         assert.equal(testTripService.getTripsByUser(friend).length, 0)
      });
 
-
      it('should return an array with trips when users are friends', () => {
-        let friend = new User()
-        let aFriend = new User()
-        friend.addFriend(aFriend)
-        friend.addFriend(LoggedInUser)
-        friend.addTrip("Brasil");
-        friend.addTrip("London");
+        let friend = UserBuilder.aUser().friendsWith(anotherUser, LoggedInUser).withTrips("Brasil", "London").build()
         assert.equal(testTripService.getTripsByUser(friend).length, 2)
      });
-
-     
 
 })
