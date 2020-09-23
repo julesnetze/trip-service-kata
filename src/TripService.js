@@ -15,10 +15,6 @@ class TripService {
         return new Array;
     }
 
-    getLoggedUser() {
-        return UserSession.getLoggedUser()
-    }
-
     tripsByUser(user) {
         return TripDAO.findTripsByUser(user)
     }

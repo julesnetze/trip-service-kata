@@ -10,8 +10,9 @@ let UserBuilder = require('./UserBuilder');
 
 describe('TripService', () => {
 
-    var loggedInUser = new User()
+    let loggedInUser = new User()
     let anotherUser = new User();
+    let notLoggedInUser = null
     
     class TestTripService extends TripService {
         tripsByUser(user) {
@@ -21,10 +22,9 @@ describe('TripService', () => {
     let testTripService = new TestTripService()
 
     it('should throw an error if user is not logged in ', () => {
-        var loggedInUser = null
-        let friend = UserBuilder.aUser().friendsWith(loggedInUser).build()
+        let friend = UserBuilder.aUser().friendsWith(notLoggedInUser).build()
         expect(function() {
-            testTripService.getTripsByUser(friend, loggedInUser)
+            testTripService.getTripsByUser(friend, notLoggedInUser)
         }).to.throw('User not logged in.');
      });
 
