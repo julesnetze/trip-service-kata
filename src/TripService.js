@@ -4,11 +4,11 @@ let UserSession = require('./UserSession');
 let TripDAO = require('./TripDAO');
 
 class TripService {
-    getTripsByUser(friend) {
-        if (this.getLoggedUser() == null) {
+    getTripsByUser(friend, loggedInUser) {
+        if (loggedInUser == null) {
             throw new Error('User not logged in.');
         }
-        return (friend.checkFriend(this.getLoggedUser())) ? this.tripsByUser(friend) : this.noTrips();
+        return (friend.checkFriend(loggedInUser)) ? this.tripsByUser(friend) : this.noTrips();
     }
 
     noTrips() {
