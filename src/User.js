@@ -10,10 +10,6 @@ module.exports = class User {
         this.friends.push(user)
     }
 
-    getFriends() {
-        return this.friends
-    }
-
     addTrip(trip) {
         this.trips.push(trip)
     }
