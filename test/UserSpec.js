@@ -1,9 +1,6 @@
-"use strict";
-
-var expect = require('chai').expect
 var sinon = require('sinon');
-
 let assert = require('assert');
+
 let User = require('../src/User');
 let UserBuilder = require('./UserBuilder');
 

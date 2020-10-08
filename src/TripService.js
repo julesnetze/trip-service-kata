@@ -1,9 +1,7 @@
-"use strict";
-
-let UserSession = require('./UserSession');
-let TripDAO = require('./TripDAO');
-
 class TripService {
+    constructor(tripDataAccessObject) {
+        this.tripDataAccessObject = tripDataAccessObject
+    }
     getTripsByUser(friend, loggedInUser) {
         if (loggedInUser == null) {
             throw new Error('User not logged in.');
@@ -14,9 +12,9 @@ class TripService {
     noTrips() {
         return new Array;
     }
-
+    
     tripsByUser(user) {
-        return TripDAO.findTripsByUser(user)
+        return this.tripDataAccessObject.findTripsByUser(user)
     }
     
 }
